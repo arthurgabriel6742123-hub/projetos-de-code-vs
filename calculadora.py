@@ -1,27 +1,42 @@
-print("=== Calculadora ===")
-print("Operações disponíveis: +, -, * e /")
+print("=== Super Calculadora ===")
 
 try:
-    numero1 = float(input("Digite o primeiro número: "))
-    operacao = input("Digite a operação (+, -, *, /): ").strip()
-    numero2 = float(input("Digite o segundo número: "))
+    primeiro_numero = float(input("Digite o primeiro número: "))
+    resultado = primeiro_numero
+    quantidade = 1
 
-    if operacao == "+":
-        resultado = numero1 + numero2
-    elif operacao == "-":
-        resultado = numero1 - numero2
-    elif operacao == "*":
-        resultado = numero1 * numero2
-    elif operacao == "/":
-        if numero2 == 0:
-            print("Erro: não é possível dividir por zero.")
-            raise SystemExit(1)
-        resultado = numero1 / numero2
-    else:
-        print("Erro: operação inválida.")
-        raise SystemExit(1)
+    while quantidade < 9:
+        operacao = input("Qual é a operação? (+, -, *, /): ").strip()
+        if operacao not in ("+", "-", "*", "/"):
+            print("Operação inválida. Escolha +, -, * ou /.")
+            continue
 
-    print(f"Resultado: {resultado:g}")
+        segundo_numero = float(input("Digite o próximo número: "))
+
+        if operacao == "+":
+            resultado += segundo_numero
+        elif operacao == "-":
+            resultado -= segundo_numero
+        elif operacao == "*":
+            resultado *= segundo_numero
+        elif operacao == "/":
+            if segundo_numero == 0:
+                print("Não é possível dividir por zero.")
+                continue
+            resultado /= segundo_numero
+
+        quantidade += 1
+        print(f"Resultado até agora: {resultado:g}")
+
+        if quantidade == 9:
+            print("Você chegou ao limite de 9 números.")
+            break
+
+        continuar = input("Deseja botar outro número? (s/n): ").strip().lower()
+        if continuar not in ("s", "sim"):
+            break
+
+    print(f"Resultado final: {resultado:g}")
 except ValueError:
     print("Erro: digite números válidos.")
     raise SystemExit(1)
